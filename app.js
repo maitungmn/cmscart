@@ -25,6 +25,9 @@ app.set('view engine', 'ejs');
 // Set Public Folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Set global errors variable
+app.locals.errors = null;
+
 // Set Router
 var pages = require('./routes/pages.js');
 var adminPages = require('./routes/adminPages.js');

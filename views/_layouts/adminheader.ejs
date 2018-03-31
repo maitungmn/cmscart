@@ -39,5 +39,12 @@
 
     <div class="starter-template">
         <%- messages('messages', locals) %>
+        <% if(errors){ %>
+        <% errors.forEach(function (error) {   %>
+         <div class="alert alert-danger">
+             <% error.msg %>
+         </div>
+        <% }) %>
+        <% } %>
 
 
