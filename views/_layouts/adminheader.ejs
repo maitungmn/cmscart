@@ -42,9 +42,9 @@
         <% if(errors){ %>
         <% errors.forEach(function (error) {   %>
          <div class="alert alert-danger">
-             <% error.msg %>
+             <%= error.msg %>
          </div>
-        <% }) %>
+        <% }); %>
         <% } %>
 
 
