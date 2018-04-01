@@ -78,5 +78,28 @@ router.post("/add-page", function (req, res) {
 
 });
 
+/**
+ * POST reorder pages
+ */
+router.post("/reorder-pages", function (req, res) {
+    var ids = req.body['id[]'];
+    var count = 0;
+    for(var i = 0; i < ids.length; i++){
+        var id = ids[i];
+        count++;
+        (function (count) {
+            Page.findById(id, function (err, page) {
+                page.sorting = count;
+                page.save(function (err) {
+                    if(err)
+                        return console.log(err);
+                });
+            });
+        })(count);
+    }
+});
+
+
+
 //Exports
 module.exports = router;
