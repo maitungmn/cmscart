@@ -55,7 +55,7 @@ router.post("/add-category", function (req, res) {
             }else {
                 var category = new Category({
                     title: title,
-                    slug: slug,
+                    slug: slug
                 });
                 category.save(function (err) {
                     if(err)
@@ -69,39 +69,17 @@ router.post("/add-category", function (req, res) {
 
 });
 
-/**
- * POST reorder Categories
- */
-router.post("/reorder-Categories", function (req, res) {
-    var ids = req.body['id[]'];
-    var count = 0;
-    for(var i = 0; i < ids.length; i++){
-        var id = ids[i];
-        count++;
-        (function (count) {
-            Category.findById(id, function (err, Category) {
-                Category.sorting = count;
-                Category.save(function (err) {
-                    if(err)
-                        return console.log(err);
-                });
-            });
-        })(count);
-    }
-});
 
 /**
  * Get edit Category
  */
-router.get("/edit-Category/:slug", function (req, res) {
-    Category.findOne({slug: req.params.slug},function (err, Category) {
+router.get("/edit-category/:id", function (req, res) {
+    Category.findById(req.params.id, function (err, category) {
         if (err)
             return console.log(err);
-        res.render('admin/edit_Category',{
-            title: Category.title,
-            slug: Category.slug,
-            content: Category.content,
-            id: Category._id
+        res.render('admin/edit_category',{
+            title: category.title,
+            id: category._id
         })
     });
 });
@@ -109,15 +87,12 @@ router.get("/edit-Category/:slug", function (req, res) {
 /**
  * Post edit Category
  */
-router.post("/edit-Category/:slug", function (req, res) {
+router.post("/edit-category/:id", function (req, res) {
     req.checkBody('title', 'Title must have Value.').notEmpty();
-    req.checkBody('content', 'Content must have Value.').notEmpty();
 
     var title = req.body.title;
-    var slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();
-    if(slug == "") slug = title.replace(/\s+/g, '-').toLowerCase();
-    var content = req.body.content;
-    var id = req.body.id;
+    var slug = title.replace(/\s+/g, '-').toLowerCase();
+    var id = req.params.id;
 
     var errors = req.validationErrors();
     if(errors){
@@ -125,33 +100,29 @@ router.post("/edit-Category/:slug", function (req, res) {
         res.render('admin/edit_Category',{
             errors: errors,
             title: title,
-            slug: slug,
-            content: content
+            id: id
         })
     }else{
         // $ne = not equal
-        Category.findOne({slug: slug, _id:{'$ne':id}}, function (err, Category) {
-            if(Category){
-                req.flash('danger', 'Category slug exists, choose another!');
-                res.render('admin/edit_Category',{
+        Category.findOne({slug: slug, _id:{'$ne':id}}, function (err, category) {
+            if(category){
+                req.flash('danger', 'Category title exists, choose another!');
+                res.render('admin/edit_category',{
                     title: title,
-                    slug: slug,
-                    content: content,
                     id: id
                 })
             }else {
-                Category.findById(id, function (err, Category) {
+                Category.findById(id, function (err, category) {
                     if(err)
                         return console.log(err);
-                    Category.title = title;
-                    Category.slug = slug;
-                    Category.content = content;
+                    category.title = title;
+                    category.slug = slug;
 
-                    Category.save(function (err) {
+                    category.save(function (err) {
                         if(err)
                             return console.log(err);
                         req.flash('success', 'Category Edited!');
-                        res.redirect('/admin/Categories/edit-Category/'+Category.slug);
+                        res.redirect('/admin/categories/edit-category/'+ id);
                     });
                 });
 
