@@ -31,6 +31,7 @@ app.locals.errors = null;
 // Set Router
 var pages = require('./routes/pages.js');
 var adminPages = require('./routes/adminPages.js');
+var adminCategories = require('./routes/adminCategories.js');
 
 //Body-parser MiddleWare
 // parse application/x-www-form-urlencoded
@@ -41,9 +42,9 @@ app.use(bodyParser.json());
 //Express Sesison MiddleWare
 app.use(session({
     secret: 'keyboard cat',
-    resave: false,
+    resave: true,
     saveUninitialized: true,
-    cookie: { secure: true }
+    // cookie: { secure: true }
 }));
 
 //Express Validator Middleware
@@ -73,6 +74,7 @@ app.use(function (req, res, next) {
 
 app.use('/', pages);
 app.use('/admin/pages', adminPages);
+app.use('/admin/categories', adminCategories);
 
 //Start the server
 var port = 3000;
