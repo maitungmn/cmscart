@@ -5,6 +5,8 @@ var config = require('./config/database');
 var bodyParser = require('body-parser');
 var session = require('express-session');
 var expressValidator = require('express-validator');
+var fileUpload = require('express-fileupload');
+
 
 
 //Connect to DB
@@ -32,6 +34,10 @@ app.locals.errors = null;
 var pages = require('./routes/pages.js');
 var adminPages = require('./routes/adminPages.js');
 var adminCategories = require('./routes/adminCategories.js');
+var adminProducts = require('./routes/adminProducts.js');
+
+// Express fileUpload Middleware
+app.use(fileUpload());
 
 //Body-parser MiddleWare
 // parse application/x-www-form-urlencoded
@@ -75,6 +81,7 @@ app.use(function (req, res, next) {
 app.use('/', pages);
 app.use('/admin/pages', adminPages);
 app.use('/admin/categories', adminCategories);
+app.use('/admin/products', adminProducts);
 
 //Start the server
 var port = 3000;

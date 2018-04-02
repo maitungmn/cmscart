@@ -137,12 +137,12 @@ router.post("/edit-category/:id", function (req, res) {
  * Get Delete Category
  */
 // Category.finBy... : Mongoose Function
-router.get("/delete-Category/:id", function (req, res) {
+router.get("/delete-category/:id", function (req, res) {
     Category.findByIdAndRemove(req.params.id, function (err) {
         if(err)
             return console.log(err);
         req.flash('success', 'Category deleted!');
-        res.redirect('/admin/Categories/');
+        res.redirect('/admin/categories/');
     })
 });
 
