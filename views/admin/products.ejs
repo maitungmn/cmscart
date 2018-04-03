@@ -1,6 +1,6 @@
 <%- include ../_layouts/adminheader %>
 <h2 class="page-title" style="margin-top: 50px">Products</h2>
-<a href="/admin/product/add-product" class="btn btn-primary">Add a new Product</a>
+<a href="/admin/products/add-product" class="btn btn-primary">Add a new Product</a>
 <br><br>
 <% if (count > 0) { %>
 
@@ -18,14 +18,14 @@
     <tbody>
         <% products.forEach(function (product) {   %>
         <tr>
-            <td><%= page.title %></td>
-            <td>$<%= parseFloat(page.price).toFixed(2) %></td>
-            <td><%= page.category %></td>
+            <td><%= product.title %></td>
+            <td>$<%= parseFloat(product.price).toFixed(2) %></td>
+            <td><%= product.category %></td>
             <td>
                 <% if(product.image == "") { %>
-                <img src="/images/noimage.png">
+                <img id="noimage" src="/images/noimage.png">
                 <% } else { %>
-                <img src="/product_images/<%= product._id %>/<%= product.image %>">
+                <img id="noimage" src="/product_images/<%= product._id %>/<%= product.image %>">
                 <% } %>
             </td>
             <td><a href="/admin/products/edit-product/<%= product._id %>">Edit</a></td>
