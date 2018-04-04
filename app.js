@@ -69,7 +69,7 @@ app.use(bodyParser.json());
 app.use(session({
     secret: 'keyboard cat',
     resave: true,
-    saveUninitialized: true,
+    saveUninitialized: true
     // cookie: { secure: true }
 }));
 
@@ -121,7 +121,7 @@ var adminPages = require('./routes/adminPages.js');
 var adminCategories = require('./routes/adminCategories.js');
 var adminProducts = require('./routes/adminProducts.js');
 
-app.use('/', pages);
+app.use('/', products);
 app.use('/products', products);
 app.use('/admin/pages', adminPages);
 app.use('/admin/categories', adminCategories);

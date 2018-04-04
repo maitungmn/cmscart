@@ -1,3 +1,25 @@
 .top {
     margin-top: 50px;
 }
+.top1 {
+    margin-top: 70px;
+}
+img.pimage {
+    width: 150px;
+}
+a.pa {
+    display: inline-block;
+    height: 160px;
+}
+.row.products .p {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+image.spi {
+    width: 80%;
+}
+ul.gallery li {
+    display: inline-block;
+    margin: 20px;
+    list-style: none;
+}

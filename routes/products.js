@@ -1,8 +1,13 @@
 var express = require('express');
 var router = express.Router();
+var fs = require('fs-extra');
 
 // Get Product model
 var Product = require('../models/product');
+
+
+// Get Category model
+var Category = require('../models/category');
 
 /*
  * GET all products
@@ -22,28 +27,54 @@ router.get('/', function (req, res) {
 });
 
 /*
- * GET a page
+ * GET products by Category
  */
-router.get('/:slug', function (req, res) {
+router.get('/:category', function (req, res) {
 
-    var slug = req.params.slug;
+    var categorySlug = req.params.category;
 
-    Page.findOne({slug: slug}, function (err, page) {
-        if (err)
-            console.log(err);
+    Category.findOne({slug: categorySlug}, function (err, c) {
+        Product.find({category: categorySlug}, function (err, products) {
+            if (err)
+                console.log(err);
 
-        if (!page) {
-            res.redirect('/');
-        } else {
-            res.render('index', {
-                title: page.title,
-                content: page.content
+            res.render('cat_products', {
+                title: c.title,
+                products: products
             });
-        }
+        });
     });
-
-
 });
+
+/*
+ * GET products Details
+ */
+router.get('/:category/:product', function (req, res) {
+
+        var galeryImages = null;
+
+        Product.findOne({slug: req.params.product}, function (err, product) {
+            if(err) {
+                console.log(err);
+            } else {
+                var galleryDir = 'public/product_images/' + product._id +'/gallery';
+                fs.readdir(galleryDir, function (err, files) {
+                    if(err){
+                        console.log(err);
+                    }else {
+                        galeryImages = files;
+                        res.render('product', {
+                            title: product.title,
+                            p: product,
+                            galleryImages: galeryImages
+                        })
+                    }
+                })
+            }
+        })
+});
+
+
 
 // Exports
 module.exports = router;
