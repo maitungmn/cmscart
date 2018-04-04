@@ -31,7 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.locals.errors = null;
 
 // Get Page Model
-var Page = require('./models/pages');
+var Page = require('./models/page');
 
 // Get all pages to pass to header.ejs
 Page.find({}).sort({sorting: 1}).exec(function (err, pages) {
@@ -42,11 +42,19 @@ Page.find({}).sort({sorting: 1}).exec(function (err, pages) {
     }
 });
 
-// Set Router
-var pages = require('./routes/pages.js');
-var adminPages = require('./routes/adminPages.js');
-var adminCategories = require('./routes/adminCategories.js');
-var adminProducts = require('./routes/adminProducts.js');
+// Get Category Model
+var Category = require('./models/category');
+
+// Get all categories to pass to header.ejs
+Category.find(function (err, categories) {
+    if (err) {
+        console.log(err);
+    } else {
+        app.locals.categories = categories;
+    }
+});
+
+
 
 // Express fileUpload Middleware
 app.use(fileUpload());
@@ -106,8 +114,15 @@ app.use(function (req, res, next) {
     next();
 });
 
+// Set Router
+var pages = require('./routes/pages.js');
+var products = require('./routes/products.js');
+var adminPages = require('./routes/adminPages.js');
+var adminCategories = require('./routes/adminCategories.js');
+var adminProducts = require('./routes/adminProducts.js');
 
 app.use('/', pages);
+app.use('/products', products);
 app.use('/admin/pages', adminPages);
 app.use('/admin/categories', adminCategories);
 app.use('/admin/products', adminProducts);

@@ -4,7 +4,7 @@ var router = express.Router();
 /**
  * Get Page Model
  */
-var Page = require('../models/pages');
+var Page = require('../models/page');
 
 /**
  * Get Pages Index
