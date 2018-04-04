@@ -136,25 +136,31 @@ router.post("/add-product", function (req, res) {
 /**
  * Get edit product
  */
-router.get("/edit-product/:id", function (req, res) {
+router.get('/edit-product/:id', function (req, res) {
+
     var errors;
-    if(req.session.error) errors = req.session.errors;
+
+    if (req.session.errors)
+        errors = req.session.errors;
     req.session.errors = null;
+
     Category.find(function (err, categories) {
-        Product.findById(req.params.id,function (err, p) {
-            if(err){
+
+        Product.findById(req.params.id, function (err, p) {
+            if (err) {
                 console.log(err);
                 res.redirect('/admin/products');
             } else {
-                var galleryDir = 'public/product_images/' + p._id +'/gallery';
+                var galleryDir = 'public/product_images/' + p._id + '/gallery';
                 var galleryImages = null;
 
                 fs.readdir(galleryDir, function (err, files) {
-                    if(err){
+                    if (err) {
                         console.log(err);
                     } else {
                         galleryImages = files;
-                        res.render('admin/edit_product',{
+
+                        res.render('admin/edit_product', {
                             title: p.title,
                             errors: errors,
                             desc: p.desc,
@@ -166,79 +172,157 @@ router.get("/edit-product/:id", function (req, res) {
                             id: p._id
                         });
                     }
-                })
+                });
             }
         });
 
     });
-});
 
+});
 /**
- * Post edit page
+ * Post edit product
  */
-router.post("/edit-page/:id", function (req, res) {
-    req.checkBody('title', 'Title must have Value.').notEmpty();
-    req.checkBody('content', 'Content must have Value.').notEmpty();
+router.post('/edit-product/:id', function (req, res) {
+
+    var imageFile = typeof req.files.image !== "undefined" ? req.files.image.name : "";
+
+    req.checkBody('title', 'Title must have a value.').notEmpty();
+    req.checkBody('desc', 'Description must have a value.').notEmpty();
+    req.checkBody('price', 'Price must have a value.').isDecimal();
+    req.checkBody('image', 'You must upload an image').isImage(imageFile);
 
     var title = req.body.title;
-    var slug = req.body.slug.replace(/\s+/g, '-').toLowerCase();
-    if(slug == "") slug = title.replace(/\s+/g, '-').toLowerCase();
-    var content = req.body.content;
+    var slug = title.replace(/\s+/g, '-').toLowerCase();
+    var desc = req.body.desc;
+    var price = req.body.price;
+    var category = req.body.category;
+    var pimage = req.body.pimage;
     var id = req.params.id;
 
     var errors = req.validationErrors();
-    if(errors){
-        console.log('Validator is Working!');
-        res.render('admin/edit_page',{
-            errors: errors,
-            title: title,
-            slug: slug,
-            content: content
-        })
-    }else{
-        // $ne = not equal
-        Page.findOne({slug: slug, _id:{'$ne':id}}, function (err, page) {
-            if(page){
-                req.flash('danger', 'Page slug exists, choose another!');
-                res.render('admin/edit_page',{
-                    title: title,
-                    slug: slug,
-                    content: content,
-                    id: id
-                })
-            }else {
-                Page.findById(id, function (err, page) {
-                    if(err)
-                        return console.log(err);
-                    page.title = title;
-                    page.slug = slug;
-                    page.content = content;
 
-                    page.save(function (err) {
-                        if(err)
-                            return console.log(err);
-                        req.flash('success', 'Page Edited!');
-                        res.redirect('/admin/pages/edit-page/'+ id);
+    if (errors) {
+        req.session.errors = errors;
+        res.redirect('/admin/products/edit-product/' + id);
+    } else {
+        Product.findOne({slug: slug, _id: {'$ne': id}}, function (err, p) {
+            if (err)
+                console.log(err);
+
+            if (p) {
+                req.flash('danger', 'Product title exists, choose another.');
+                res.redirect('/admin/products/edit-product/' + id);
+            } else {
+                Product.findById(id, function (err, p) {
+                    if (err)
+                        console.log(err);
+
+                    p.title = title;
+                    p.slug = slug;
+                    p.desc = desc;
+                    p.price = parseFloat(price).toFixed(2);
+                    p.category = category;
+                    if (imageFile != "") {
+                        p.image = imageFile;
+                    }
+
+                    p.save(function (err) {
+                        if (err)
+                            console.log(err);
+
+                        if (imageFile != "") {
+                            if (pimage != "") {
+                                fs.remove('public/product_images/' + id + '/' + pimage, function (err) {
+                                    if (err)
+                                        console.log(err);
+                                });
+                            }
+
+                            var productImage = req.files.image;
+                            var path = 'public/product_images/' + id + '/' + imageFile;
+
+                            productImage.mv(path, function (err) {
+                                return console.log(err);
+                            });
+
+                        }
+
+                        req.flash('success', 'Product edited!');
+                        res.redirect('/admin/products/edit-product/' + id);
                     });
+
                 });
-
-
             }
-        })
+        });
     }
 
 });
 
 /**
- * Get Delete Page
+ * Post Product Gallery
+ */
+router.post('/product-gallery/:id', function (req, res) {
+
+    var productImage = req.files.file;
+    var id = req.params.id;
+    var path = 'public/product_images/' + id + '/gallery/' + req.files.file.name;
+    var thumbsPath = 'public/product_images/' + id + '/gallery/thumbs/' + req.files.file.name;
+
+    productImage.mv(path, function (err) {
+        if (err)
+            console.log(err);
+
+        resizeImg(fs.readFileSync(path), {width: 100, height: 100}).then(function (buf) {
+            fs.writeFileSync(thumbsPath, buf);
+        });
+    });
+
+    res.sendStatus(200);
+
+});
+
+/**
+ * Get Delete Image
+ */
+router.get("/delete-image/:image", function (req, res) {
+    var originalImage = 'public/product_images/' + req.query.id + '/gallery/' + req.params.image;
+    var thumbsImage = 'public/product_images/' + req.query.id + '/gallery/thumbs' + req.params.image;
+
+    fs.remove(originalImage, function (err) {
+        if (err) {
+            console.log(err);
+        } else {
+            fs.remove(thumbsImage, function (err) {
+                if (err) {
+                    console.log(err);
+                }  else {
+                    req.flash('success', 'Image Deleted!');
+                    res.redirect('/admin/products/edit-product/' + req.query.id);
+                }
+            })
+
+        }
+    })
+});
+
+/**
+ * Get Delete Product
  */
 // Page.finBy... : Mongoose Function
-router.get("/delete-page/:id", function (req, res) {
-    Page.findByIdAndRemove(req.params.id, function (err) {
-        if(err)
-            return console.log(err);
-        req.flash('success', 'Page deleted!');
-        res.redirect('/admin/pages/');
+router.get("/delete-product/:id", function (req, res) {
+    var id = req.params.id;
+    var path = 'public/product_images/' + id;
+
+    fs.remove(path, function (err) {
+        if(err) {
+            console.log(err)
+        } else {
+            Product.findByIdAndRemove(id, function (err) {
+                    console.log(err);
+            });
+            req.flash('success', 'Product Deleted!');
+            res.redirect('/admin/products');
+        }
     })
 });
 

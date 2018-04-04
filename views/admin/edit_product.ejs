@@ -60,7 +60,7 @@
     <% galleryImages.forEach(function (image) {   %>
     <% if(image != "thumbs"){ %>
     <li>
-        <img id="noimage" src="/product_images/<%= id %>/<%= image %>">&nbsp;
+        <img src="/product_images/<%= id %>/gallery/thumbs/<%= image %>">&nbsp;
         <a class="confirmDeletion" href="/admin/products/delete-image/<%= image %>?id=<%= id %>">delete</a>
     </li>
     <% } %>
@@ -68,7 +68,12 @@
 </ul>
 
 <br><br>
-<form action="/admin/products/product-gallery/<%= id %>" method="post" enctype="multipart/form-data" class="dropzone" id="dropzone-form"></form>
+<form action="/admin/products/product-gallery/<%= id %>" method="post" enctype="multipart/form-data" class="dropzone" id="dropzone-form">
+    <div class="fallback">
+        <input type="file" name="file" multiple>
+        <input type="submit" value="Upload" >
+    </div>
+</form>
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/basic.css" >
@@ -95,12 +100,12 @@
     // Dropzone
     Dropzone.options.dropzoneForm = {
         acceptedFiles: "image/*",
-        init: function () {
-            this.on("queuecomplete", function (file) {
-                setTimeout(function () {
+        init: function() {
+            this.on("queuecomplete", function(file) {
+                setTimeout(function() {
                     location.reload()
                 }, 1000);
-            })
+            });
         }
     }
 </script>
