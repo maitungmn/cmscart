@@ -15,7 +15,7 @@ a.pa {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-image.spi {
+img.spi {
     width: 80%;
 }
 ul.gallery li {
@@ -26,4 +26,11 @@ ul.gallery li {
 
 .gallery {
     padding: 0;
+}
+img.cpi {
+    width: 100px;
+}
+
+table.alignmiddle td {
+    vertical-align: middle !important;
 }
