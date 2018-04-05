@@ -18,8 +18,9 @@
             <% galleryImages.forEach(function (image) {   %>
             <% if(image != "thumbs") { %>
             <li>
-                <a href="/product_images/<%= p.id %>/gallery/<%= image %>">
+                <a data-fancybox="gallery" href="/product_images/<%= p.id %>/gallery/<%= image %>">
                     <img src="/product_images/<%= p.id %>/gallery/thumbs/<%= image %>" alt="">
+                </a>
             </li>
             <% } %>
             <% }) %>
