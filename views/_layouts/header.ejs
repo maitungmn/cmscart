@@ -36,10 +36,22 @@
             <% } %>
             <% }); %>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        <ul class="navbar-nav navbar-right">
+            <li>
+                <a href="/products/cart/checkout">My Cart (
+                    <% if (typeof cart !== "undefined") { %>
+                    <%= cart.length %>
+                    <% } else { %>
+                    0
+                    <% } %>
+                    )
+                </a>
+            </li>
+        </ul>
+        <!--<form class="form-inline my-2 my-lg-0">-->
+            <!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+            <!--<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>-->
+        <!--</form>-->
     </div>
 </nav>
 
