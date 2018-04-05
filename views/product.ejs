@@ -1,17 +1,19 @@
 <% include _layouts/header %>
 
-<div class="row">
+<div class="col-xs-12 col-md-9">
 
     <h1 class="page-header"><%= p.title %></h1>
     <hr>
-    <div class="col-xs-12 col-md-6">
-        <img src="/product_images/<%= p.id %>/<%= p.image %>" class="spi" style="width: 100%">
-        <br>
-    </div>
-    <div class="col-xs-12 col-md-2">
-        <p><%= p.desc %></p>
-        <p>$<%= parseFloat(p.price).toFixed(2) %></p>
-        <p><a href="/cart/add/<%= p.slug %>">Add to Cart</a></p>
+    <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <img src="/product_images/<%= p.id %>/<%= p.image %>" class="spi" style="width: 100%">
+            <br>
+        </div>
+        <div class="col-xs-12 col-md-2">
+            <p><%= p.desc %></p>
+            <p>$<%= parseFloat(p.price).toFixed(2) %></p>
+            <p><a href="/cart/add/<%= p.slug %>">Add to Cart</a></p>
+        </div>
     </div>
     <div class="col-xs-12">
         <ul class="gallery">
