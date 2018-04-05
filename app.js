@@ -122,7 +122,7 @@ var adminCategories = require('./routes/adminCategories.js');
 var adminProducts = require('./routes/adminProducts.js');
 
 app.use('/', pages);
-app.use('/products', products);
+app.use('/products/all', products);
 app.use('/admin/pages', adminPages);
 app.use('/admin/categories', adminCategories);
 app.use('/admin/products', adminProducts);
