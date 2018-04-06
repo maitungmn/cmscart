@@ -19,7 +19,12 @@
 </head>
 
 <body>
-
+<div class="ajaxbg">
+    <div class="ajaxinner">
+        <h3>You are now being redirected to Paypal...</h3>
+        <img src="/images/ajax-loader.gif" alt="">
+    </div>
+</div>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <a class="navbar-brand" href="/">Mai Tung CMS Shopping Cart</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,13 +37,13 @@
             <% if(page.slug == "home") { %>
             <li><a class="nav-link" href="/"><%= page.title %></a></li>
             <% } else { %>
-            <li><a class="nav-link" href="<%= page.slug %>"><%= page.title %></a></li>
+            <li><a class="nav-link" href="/<%= page.slug %>"><%= page.title %></a></li>
             <% } %>
             <% }); %>
         </ul>
         <ul class="navbar-nav navbar-right">
             <li>
-                <a href="/products/cart/checkout">My Cart (
+                <a class="nav-link" href="/products/cart/checkout">My Cart (
                     <% if (typeof cart !== "undefined") { %>
                     <%= cart.length %>
                     <% } else { %>
@@ -47,6 +52,15 @@
                     )
                 </a>
             </li>
+            <% if(user) { %>
+            <li><a class="nav-link" href="/users/logout">Hi, <%= user.username %> ( logout )</a></li>
+            <% } else { %>
+            <li><a class="nav-link" href="/users/register">Register</a></li>
+            <li><a class="nav-link" href="/users/login">Login</a></li>
+            <% } %>
+            <% if(user && user.admin == 1) { %>
+            <li><a class="nav-link" href="/admin/pages">Admin Area</a></li>
+            <% } %>
         </ul>
         <!--<form class="form-inline my-2 my-lg-0">-->
             <!--<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
@@ -59,6 +73,13 @@
 
     <div class="starter-template">
         <%- messages('messages', locals) %>
+        <% if(errors){ %>
+        <% errors.forEach(function (error) {   %>
+        <div class="alert alert-danger">
+            <%= error.msg %>
+        </div>
+        <% }); %>
+        <% } %>
 
         <div class="row">
             <div class="col-xs-12 col-md-3">
