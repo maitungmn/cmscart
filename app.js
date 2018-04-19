@@ -148,5 +148,5 @@ app.use('/admin/products', adminProducts);
 //Start the server
 
 
-app.listen(process.env.PORT || 3000);
-console.log(`Running on http://${host}:${port}`);
+var port_number = app.listen(process.env.PORT || 5000);
+app.listen(port_number);
