@@ -146,7 +146,7 @@ app.use('/admin/categories', adminCategories);
 app.use('/admin/products', adminProducts);
 
 //Start the server
-var port = 3000;
 
-app.listen(process.env.PORT || port);
+
+app.listen(process.env.PORT || 3000);
 console.log(`Running on http://${host}:${port}`);
