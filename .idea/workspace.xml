@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="2b7c78e2-4fee-4932-a909-0b17e0c70b72" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,8 +19,8 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="556">
-              <caret line="148" column="16" lean-forward="true" selection-start-line="148" selection-start-column="16" selection-end-line="148" selection-end-column="16" />
+            <state relative-caret-position="646">
+              <caret line="152" column="21" lean-forward="false" selection-start-line="152" selection-start-column="21" selection-end-line="152" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -32,6 +31,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="300">
               <caret line="20" column="0" lean-forward="false" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
               <folding />
             </state>
           </provider>
@@ -104,16 +113,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="30">
               <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="3" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="adminProducts.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/routes/adminProducts.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="27" lean-forward="false" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -230,61 +229,6 @@
               <item name="cmsCart" type="b2602c69:ProjectViewProjectNode" />
               <item name="cmsCart" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="cmsCart" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cmsCart" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cmsCart" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cmsCart" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cmsCart" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cmsCart" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cmsCart" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cmsCart" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cmsCart" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cmsCart" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cmsCart" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cmsCart" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cmsCart" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cmsCart" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cmsCart" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cmsCart" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cmsCart" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cmsCart" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="_layouts" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cmsCart" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cmsCart" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -366,7 +310,10 @@
       <workItem from="1522893490265" duration="10972000" />
       <workItem from="1522979238045" duration="10918000" />
       <workItem from="1523064615795" duration="215000" />
-      <workItem from="1523189306305" duration="2597000" />
+      <workItem from="1523189306305" duration="3233000" />
+      <workItem from="1523199403871" duration="354000" />
+      <workItem from="1523199868797" duration="866000" />
+      <workItem from="1524118344072" duration="122000" />
     </task>
     <task id="LOCAL-00001" summary="Video 10: Done!">
       <created>1522478336617</created>
@@ -449,7 +396,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="104619000" />
+    <option name="totallyTimeSpent" value="106597000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -725,14 +672,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/css/adminstyle.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
@@ -840,7 +779,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="885">
           <caret line="59" column="12" lean-forward="false" selection-start-line="59" selection-start-column="12" selection-end-line="59" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -848,7 +786,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="4" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -926,10 +863,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="4" lean-forward="false" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="148" column="16" lean-forward="true" selection-start-line="148" selection-start-column="16" selection-end-line="148" selection-end-column="16" />
+        <state relative-caret-position="646">
+          <caret line="152" column="21" lean-forward="false" selection-start-line="152" selection-start-column="21" selection-end-line="152" selection-end-column="21" />
           <folding />
         </state>
       </provider>

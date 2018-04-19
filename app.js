@@ -147,7 +147,6 @@ app.use('/admin/products', adminProducts);
 
 //Start the server
 var port = 3000;
-var host = '0.0.0.0';
-app.listen(port, host);
+
+app.listen(process.env.PORT || port);
 console.log(`Running on http://${host}:${port}`);
-console.log('dasda');
